@@ -1,1 +1,16 @@
-Small program to test the setup of the C++ Boost library. Implementation of http://www.boost.org/doc/libs/1_50_0/more/getting_started/unix-variants.html#link-your-program-to-a-boost-library
+Small program to test the setup of the C++ Boost libraries. Uses the boost regex library to extract the subject line from an email.
+
+Implementation of http://www.boost.org/doc/libs/1_50_0/more/getting_started/unix-variants.html#link-your-program-to-a-boost-library
+
+Instructions:
+1. Download the boost libraries from http://www.boost.org/doc/libs/1_50_0/more/getting_started/unix-variants.html#get-boost
+2. Compile the boost libraries, following http://www.boost.org/doc/libs/1_50_0/more/getting_started/unix-variants.html#easy-build-and-install
+3. Add the path of the boost libraries to ld (otherwise program execution will fail when the regex boost library is not found): $ echo "/path/in/instruction/6b" | sudo tee /etc/ld.so.conf.d/boost_lib.conf
+4. Reload ld and check boost libraries now loaded correctly: $ sudo ldconfig -v | grep "boost" # Should produce more than 10 results
+5. Download the source files from this Github repository
+6. Modify the Makefile:
+6a. Replace the '/home/clive/Documents/c++/boost_lib/install/include' string with the location of the directory containing the include files of your boost installation
+6b. Replace the '/home/clive/Documents/c++/boost_lib/install/lib' string with the location of the directory containing the library files of your boost installation
+7. Compile Boost-setup-test source files: $ make
+8. Make the compiled binary file executable: $ chmod +x extract_subj
+9. Execute the program: $ extract_subj <testin
